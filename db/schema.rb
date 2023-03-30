@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_115611) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_120043) do
   create_table "countries", force: :cascade do |t|
     t.integer "iso_code"
     t.string "name"
@@ -76,14 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_115611) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "languages_movies", id: false, force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.integer "language_id", null: false
-    t.index "\"language_role_id\"", name: "index_languages_movies_on_language_role_id"
-    t.index ["language_id"], name: "index_languages_movies_on_language_id"
-    t.index ["movie_id"], name: "index_languages_movies_on_movie_id"
-  end
-
   create_table "movie_casts", force: :cascade do |t|
     t.integer "movie_id", null: false
     t.integer "gender_id", null: false
@@ -107,6 +99,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_115611) do
     t.index ["department_id"], name: "index_movie_crews_on_department_id"
     t.index ["movie_id"], name: "index_movie_crews_on_movie_id"
     t.index ["person_id"], name: "index_movie_crews_on_person_id"
+  end
+
+  create_table "movie_languages", force: :cascade do |t|
+    t.integer "language_id", null: false
+    t.integer "language_role_id", null: false
+    t.integer "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_movie_languages_on_language_id"
+    t.index ["language_role_id"], name: "index_movie_languages_on_language_role_id"
+    t.index ["movie_id"], name: "index_movie_languages_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -151,4 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_115611) do
   add_foreign_key "movie_crews", "departments"
   add_foreign_key "movie_crews", "movies"
   add_foreign_key "movie_crews", "people"
+  add_foreign_key "movie_languages", "language_roles"
+  add_foreign_key "movie_languages", "languages"
+  add_foreign_key "movie_languages", "movies"
 end

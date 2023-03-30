@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  language: one
+  language_role: one
+  movie: one
+
+two:
+  language: two
+  language_role: two
+  movie: two
