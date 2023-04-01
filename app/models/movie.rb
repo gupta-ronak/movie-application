@@ -4,15 +4,12 @@ class Movie < ApplicationRecord
   has_many :movie_languages
   has_many :languages , through: :movie_languages
   has_many :language_roles , through: :movie_languages
-  has_and_belongs_to_many :genre
-  has_and_belongs_to_many :keyword
-  has_and_belongs_to_many :production_company
-  has_many :movie_cast
-  has_many :movie_crew
+  has_and_belongs_to_many :genres
+  has_and_belongs_to_many :keywords
+  has_and_belongs_to_many :production_companies
+  has_many :movie_casts
+  has_many :movie_crews
   has_many :departments , through: :movie_crew
-
-
-
 
   #Validation
   validates :title, presence: true, length: { maximum: 30 }
